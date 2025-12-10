@@ -1,0 +1,84 @@
+/* Register.css */
+.register-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #8ec5fc, #e0c3fc);
+  background-repeat: no-repeat;
+  background-size: 180px, 150px, 120px;
+  background-position: 20% 30%, 80% 20%, 60% 80%;
+  background-size: cover;
+}
+
+.register-card {
+  width: 420px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.register-title {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #1e1e1e;
+}
+
+.register-subtitle {
+  color: #5a5a5a;
+  margin-bottom: 30px;
+  font-size: 14px;
+}
+
+.form-group {
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+}
+
+.btn-register {
+  width: 100%;
+  padding: 12px;
+  background: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 15px;
+  font-size: 16px;
+  transition: 0.2s ease-in-out;
+}
+
+.btn-register:hover {
+  background: #1f8f4d;
+}
+
+.login-text {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.login-text a {
+  color: #2f80ed;
+  text-decoration: none;
+  font-weight: 600;
+}

@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import "./login.css";
 import "./login.css";
 
 export default function Login() {
@@ -6,11 +8,7 @@ export default function Login() {
     <div className="login-container">
       <div className="login-card">
         <div className="title-section">
-          <img
-            src="/logo.png"
-            alt="logo"
-            className="logo-icon"
-          />
+          <img src="/logo.png" alt="logo" className="logo-icon" />
           <h1 className="app-title">BudgetFlow</h1>
         </div>
 
@@ -31,10 +29,9 @@ export default function Login() {
         <a href="#" className="forgot-link">Mot de passe oublié ?</a>
 
         <p className="register-text">
-          Pas encore de compte ? <a href="#">S'inscrire</a>
-        </p>
+  Pas encore de compte ? <Link to="/register">S'inscrire</Link>
+</p>
       </div>
     </div>
   );
 }
-
