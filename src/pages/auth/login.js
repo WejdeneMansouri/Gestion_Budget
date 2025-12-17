@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./login.css";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   // Simulation d'utilisateurs existants
   const users = [
@@ -16,7 +18,6 @@ export default function Login() {
   const handleLogin = () => {
     setError("");
 
-    // Vérifier si le compte existe
     const foundUser = users.find((u) => u.username === username);
 
     if (!foundUser) {
@@ -24,14 +25,13 @@ export default function Login() {
       return;
     }
 
-    // Vérifier le mot de passe
     if (foundUser.password !== password) {
       setError("Mot de passe incorrect.");
       return;
     }
 
-    // Si tout est correct
-    alert("Connexion réussie !");
+    // ✅ Connexion réussie → redirection
+    navigate("/dashboard");
   };
 
   return (
@@ -42,7 +42,7 @@ export default function Login() {
           <h1 className="app-title">BudgetFlow</h1>
         </div>
 
-        <p className="subtitle">Générez vos finances en toute simplicité</p>
+        <p className="subtitle">Gérez vos finances en toute simplicité</p>
 
         {error && <p className="error-message">{error}</p>}
 
@@ -50,7 +50,6 @@ export default function Login() {
           <label>Nom d'utilisateur</label>
           <input
             type="text"
-            placeholder="Nom d'utilisateur"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
@@ -60,7 +59,6 @@ export default function Login() {
           <label>Mot de passe</label>
           <input
             type="password"
-            placeholder="Mot de passe"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
