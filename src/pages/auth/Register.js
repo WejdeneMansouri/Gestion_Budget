@@ -19,27 +19,47 @@ export default function Register() {
   // Simulation: emails déjà existants (en vrai, le backend va vérifier)
   const existingEmails = ["test@mail.com", "admin@gmail.com"];
 
-  const handleRegister = () => {
-    setError("");
-    setSuccess("");
+  const handleRegister = async () => {
+  setError("");
+  setSuccess("");
 
-    // Vérification email déjà utilisé
-    if (existingEmails.includes(email)) {
-      setError("Cet email est déjà utilisé. Veuillez en choisir un autre.");
-      return;
+  // Vérification mot de passe
+  if (!validatePassword(password)) {
+    setError(
+      "Le mot de passe doit contenir au moins 8 caractères et un caractère spécial."
+    );
+    return;
+  }
+
+  try {
+    const response = await fetch("http://localhost:5000/api/auth/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        email,
+        password,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      setError(data.message || "Erreur lors de l'inscription.");
+    } else {
+      setSuccess("Compte créé avec succès !");
+      // Optional: reset form
+      setUsername("");
+      setEmail("");
+      setPassword("");
     }
+  } catch (err) {
+    setError("Erreur serveur, réessayez plus tard.");
+  }
+};
 
-    // Vérification mot de passe
-    if (!validatePassword(password)) {
-      setError(
-        "Le mot de passe doit contenir au moins 8 caractères et un caractère spécial."
-      );
-      return;
-    }
-
-    // Si tout est bon
-    setSuccess("Compte créé avec succès !");
-  };
 
   return (
     <div className="register-container">
