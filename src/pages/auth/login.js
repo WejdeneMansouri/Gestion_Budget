@@ -15,24 +15,30 @@ export default function Login() {
     { username: "test", password: "abcd@1234" }
   ];
 
-  const handleLogin = () => {
-    setError("");
+ const handleLogin = async () => {
+  setError("");
 
-    const foundUser = users.find((u) => u.username === username);
+  try {
+    const response = await fetch("http://localhost:5000/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username, password }),
+    });
 
-    if (!foundUser) {
-      setError("Login incorrect : ce nom d'utilisateur n'existe pas.");
-      return;
+    const data = await response.json();
+
+    if (!response.ok) {
+      setError(data.message || "Erreur lors de la connexion");
+    } else {
+      // Connexion réussie
+      console.log("User logged in:", data.user);
+      navigate("/dashboard");
     }
+  } catch (err) {
+    setError("Erreur serveur, réessayez plus tard");
+  }
+};
 
-    if (foundUser.password !== password) {
-      setError("Mot de passe incorrect.");
-      return;
-    }
-
-    // ✅ Connexion réussie → redirection
-    navigate("/dashboard");
-  };
 
   return (
     <div className="login-container">
